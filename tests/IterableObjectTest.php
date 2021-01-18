@@ -9,7 +9,7 @@ final class IterableObjectTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testFromArrayToIterator($data, $filter = null, $map = null, $expectedResult): void
+    public function testFromArrayToIterator($expectedResult, $data, $filter = null, $map = null): void
     {
         $iterableObject = iterable($data, $filter, $map);
         $this->assertInstanceOf(IterableObject::class, $iterableObject);
@@ -19,7 +19,7 @@ final class IterableObjectTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testFromArrayToArray($data, $filter = null, $map = null, $expectedResult): void
+    public function testFromArrayToArray($expectedResult, $data, $filter = null, $map = null): void
     {
         $iterableObject = iterable($data, $filter, $map);
         $this->assertInstanceOf(IterableObject::class, $iterableObject);
@@ -29,7 +29,7 @@ final class IterableObjectTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testFromTraversableToIterator($data, $filter = null, $map = null, $expectedResult): void
+    public function testFromTraversableToIterator($expectedResult, $data, $filter = null, $map = null): void
     {
         $data = SplFixedArray::fromArray($data);
         $iterableObject = iterable($data, $filter, $map);
@@ -40,7 +40,7 @@ final class IterableObjectTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testFromTraversableToArray($data, $filter = null, $map = null, $expectedResult): void
+    public function testFromTraversableToArray($expectedResult, $data, $filter = null, $map = null): void
     {
         $data = SplFixedArray::fromArray($data);
         $iterableObject = iterable($data, $filter, $map);
@@ -58,28 +58,28 @@ final class IterableObjectTest extends TestCase
 
         return [
             [
-                $data,
-                null,
-                null,
                 ['foo', 'bar'],
+                $data,
+                null,
+                null
             ],
             [
-                $data,
-                $filter,
-                null,
                 [1 => 'bar'],
-            ],
-            [
-                $data,
-                null,
-                $map,
-                ['FOO', 'BAR'],
-            ],
-            [
                 $data,
                 $filter,
-                $map,
+                null
+            ],
+            [
+                ['FOO', 'BAR'],
+                $data,
+                null,
+                $map
+            ],
+            [
                 [1 => 'BAR'],
+                $data,
+                $filter,
+                $map
             ],
         ];
     }
