@@ -1,5 +1,5 @@
 {
-    "name": "bentools/iterable-functions",
+    "name": "bentools/iterable-functions-2",
     "description": "Provides functions for iterable variables: is_iterable(), iterable_to_array()",
     "type": "library",
     "license": "MIT",
